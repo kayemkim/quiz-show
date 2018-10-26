@@ -13,4 +13,4 @@ from sample_application import create_app, create_app_new
 # create an app instance
 app = create_app_new()
 
-app.run(debug=True)
+app.run(debug=True, host='0.0.0.0', port=8888)
