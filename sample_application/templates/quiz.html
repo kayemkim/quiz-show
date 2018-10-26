@@ -316,6 +316,83 @@ body {
   background-image: linear-gradient(to bottom, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
 }
 
+
+/*body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(darkblue, black); 
+  height: 100vh;
+  font: normal 10px "Courier New", "Courier", monospace;
+  position: relative;
+}*/
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*background: repeating-linear-gradient(to bottom, rgba(255,255,255,.3) 1px, transparent 2px, rgba(0,0,0,.3) 3px);*/
+}
+code {
+  display: block;
+  font-size: 1.2rem;
+  color: #000000;
+  padding: 1rem;
+  filter: drop-shadow(0 0 1px #fff);
+}
+.cursor {
+  animation: cursor-blink 300ms alternate linear infinite;
+}
+@keyframes cursor-blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stamp {
+  -webkit-backface-visibility: hidden;
+  position: relative;
+}
+.stamp:after {
+  border: solid 0.1em #d00;
+  border-radius: .2em;
+  color: #d00;
+  content: 'CORRECT';
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 1;
+  opacity: 0;
+  position: absolute;
+  padding: .1em .5em;
+  margin: 0 auto;
+  top: 10%;
+  left: 10%;
+  text-transform: uppercase;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  transform: rotate(-2deg) scale(5);
+  transition: all 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+
+.loaded_correct .stamp:after {
+  opacity: .75;
+  transform: rotate(-15deg) scale(1);
+  z-index: -1;
+  content: 'CORRECT!';
+}
+
+.loaded_wrong .stamp:after {
+  opacity: .75;
+  transform: rotate(-15deg) scale(1);
+  z-index: -1;
+  content: 'WRONG..';
+  transform: rotate(17deg) scale(1);
+}
+
+
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -414,13 +491,32 @@ body {
       <div class="container">
         <h2 class="question text-center text-uppercase text-secondary mb-0">문제 : {{ question }}</h2>
         <hr class="garo"> 
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 mx-auto">
+              <div class="q_title">AI</div>
+            </div>
+            <div class="col-lg-2 mx-auto text-center score" id="score-board">
+{% if correct_count == 0 %}
+              0   :   0
+{% else %}
+              {{ ai_correct_count }}   :   {{ correct_count }}
+{% endif %}
+            </div>
+            <div class="col-lg-3 mx-auto">
+              <div class="q_title">YOU</div>
+            </div>
+          </div>
+        </div>
+
       <div class="container" id="portfolio">
         <div class="row">
           <div class="col-lg-4 mx-auto">
             <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
             <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-            <div class="q_title">AI</div>
-            <div name="sentMessage" id="ai" novalidate="novalidate">
+            <!-- <div class="q_title">AI</div> -->
+            <!-- <div name="sentMessage" id="ai" novalidate="novalidate">
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                   <label id="answer_label">답을 입력해주세요.</label>
@@ -428,15 +524,23 @@ body {
                 </div>
               </div>
               <br>
-            </div>
+            </div> -->
+          <div id="terminal">
+            <code >
+              <div id='code'></div>
+              > <span class="cursor">_</span>
+            </code>
+            <div class="overlay"></div>
+          </div>
+
           </div>
           <div class="col-lg-1 mx-auto">
             <div class="vs">VS</div>
           </div>
-          <div class="col-lg-4 mx-auto">
+          <div class="col-lg-4 mx-auto" id="div_you">
             <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
             <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-            <div class="q_title">YOU</div>
+            <!-- <div class="q_title">YOU</div> -->
 
             <form name="sentMessage" id="contactForm" novalidate="novalidate" autocomplete="off">
               <div class="control-group">
@@ -444,19 +548,32 @@ body {
                   <label id="answer_label">답을 입력해주세요.</label>
                   <input class="form-control animated infinite pulse delay-1s" name="answer" id="answer" type="text" placeholder="답을 입력해주세요." required="required" data-validation-required-message="답을 입력해주세요.">
                   <input type="hidden" name="qid" value="{{ qid }}">
+                  <input type="hidden" name="correct_count" value="{{ correct_count }}">
+                  <input type="hidden" name="ai_correct_count" value="{{ ai_correct_count }}">
                 </div>
               </div>
             </form>
-            <br>
+            <!-- <br>
               <div class="form-group">
                 <button  class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
                 <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">Back</a>
-              </div>
+              </div> -->
           </div>
         </div>
+        <br>
+        <!-- <div class="text-center">
+          <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">Back</a>
+        </div> -->
+        
       </div>
       </div>
 
+<!--         <div class='container wkbmf'>
+          <div class='stamp'>
+            Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+          </div>
+        </div>
+ -->
 
     </section>
 
@@ -493,15 +610,18 @@ body {
               data: $('form').serialize(),
               //data: data_str,
               success: function(response) {
+                /*var obj = JSON.parse(response);
+                alert(obj.correct_answer);
+                $('#div_you').append('<p class="text-center result_title animated {{ animation }}">{{ result_message }}</p>');*/
+                
                 $('#portfolio').html(response);
-
               },
               error: function(error) {
                 console.log(error)
               }
 
             }).done(function (reply) {
-                $('#portfolio').html(reply);
+                //$('#portfolio').html(reply);
              });
       }
 
@@ -547,7 +667,6 @@ body {
         $("#contactForm").keydown(function(key) {
           if (key.keyCode == 13) {
             stopTimer();
-
             submitAnswer();
 
 
@@ -566,6 +685,41 @@ body {
 
       });*/
       $(document).ready(function(){ $("#answer").focus(); });
+
+      $('#code').delay(1000).queue(function (next) {
+        $(this).append('> Initailzing...<br>').delay(500).queue(function (next) {
+          $(this).append('> Preparation complete.<br>').delay(1000).queue(function (next) {
+            $(this).append('> Inferencing...<br>').delay(300).queue(function (next) {
+              $(this).append('> Calculation done. <br>').delay(400).queue(function (next) {
+                $(this).append('> Answering complete.<br>').delay(200).queue(function (next) {
+                  $(this).append('> Wating for you...<br>').delay(1000).queue(function (next) {
+                    next();
+                  });
+                  next();
+                });
+                next();
+              });
+              next();
+            });
+            next();
+          });
+          next();
+        });
+        next();
+      });
+
+      /*$('#code').append('> Initailzing...<br>').delay(2000).queue(function (next) {
+        $(this).append('> Preparation complete.<br>')
+        next()
+
+      });*/
+      //.append('> Preparation complete.<br>');
+      /*$('#code').append('> Preparation complete.<br>');
+      $('#code').append('> Inferencing...<br>');
+      $('#code').append('> Calculation done. <br>');
+      $('#code').append('> The answer is .<span class="cursor">_</span>');*/
+
+
 
 
       jQuery.fn.onPositionChanged = function (trigger, millis) {
@@ -604,7 +758,6 @@ body {
 
 
       $("#first-zero").onPositionChanged(function(lastOff, newOff){
-        //alert('finish')
              $.ajax({
               type : "POST",
               url : "{{ url_for('result') }}",

@@ -1,30 +1,80 @@
-<body>      
-      <div class="container">
-        <h2 class="correct-answer text-center text-uppercase text-secondary animated tada mb-0">정답은 {{ correct_answer }} 입니다.</h2>
-        <hr class="garo"> 
 
+      <div class="container">
         <div class="row">
-          <div class="col-lg-4 mx-auto">
-            <div class="q_title">AI</div>
-            <p class="text-center result_title animated pulse">{{ correct_answer }}</p>
+          <div class="col-lg-4 mx-auto" id="answer_ai">
+            <!-- <div class="q_title">AI</div> -->
+            <p class="text-center result_title animated pulse stamp wkbmf">{{ ai_answer }}</p>
           </div>
           <div class="col-lg-1 mx-auto">
             <div class="vs" style="margin-top: 3rem;">VS</div>
           </div>
-          <div class="col-lg-4 mx-auto">
-            <div class="q_title">YOU</div>
-            <p class="text-center result_title animated {{ animation }}">{{ result_message }}</p>
-              <div class="form-group">
-                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">Retry?</a>
-              </div>
+          <div class="col-lg-4 mx-auto" id="answer_human">
+            <!-- <div class="q_title">YOU</div> -->
+            <p class="text-center result_title animated stamp wkbmf">{{ answer }}</p>
           </div>
         </div>
+
+        <h2 class="correct-answer text-center text-uppercase text-secondary animated tada mb-0">정답은 {{ correct_answer }} 입니다.</h2>
+        <br>
+
+{% if human_result == 'wrong' %}
+              <div class="form-group text-center">
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">다음 기회에..</a>
+              </div>
+
+
+{% elif correct_count > 0 and correct_count < 3 %}
+              <div class="form-group text-center">
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('quiz') }}?correct_count={{ correct_count }}&ai_correct_count={{ ai_correct_count }}">Next?</a>
+              </div>
+
+{% else %}
+              <div class="form-group text-center">
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('congrats') }}">축하드립니다!</a>
+              </div>
+{% endif %}
+
+        
       </div>
-</body>
+      <!-- <hr class="garo"> 
+        <h2 class="correct-answer text-center text-uppercase text-secondary animated tada mb-0">정답은 {{ correct_answer }} 입니다.</h2> -->
+
+
+
 <script type="text/javascript">
   $('#refreshButton').click(function() {
     location.reload();
   })
+
+  setTimeout(function(){
+    var aiResult = 'loaded_{{ai_result}}';
+    $('#answer_ai').addClass(aiResult)
+  },1500);
+
+  setTimeout(function(){
+    var humanResult = 'loaded_{{human_result}}';
+    $('#answer_human').addClass(humanResult)
+  },1800);
+
+  $('#score-board').text('{{ai_correct_count}}   :   {{ correct_count}}');
+
+
+  setTimeout(function(){
+    var corr_cnt = {{ correct_count }};
+    if (corr_cnt >= 3) {
+      location.href = '{{ url_for("congrats") }}'
+    }
+    var hu_res = '{{ human_result }}';
+    if (hu_res == 'wrong') {
+      location.href = '{{ url_for("wrong") }}'
+    }
+  }, 3000);
+
+
+
+
+
+
 </script>
 
 

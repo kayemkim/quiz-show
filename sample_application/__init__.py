@@ -9,29 +9,30 @@ from wtforms.validators import Required
 from flask import request
 import flask_sijax
 import random
+import json
 
 
 qa_set = {
     0:(
         '''이순신(李舜臣, 1545년 4월 28일 ~ 1598년 12월 16일 (음력 11월 19일))은 조선 중기의 무신이다. 본관은 덕수(德水), 자는 여해(汝諧), 시호는 충무(忠武)이며, 한성 출신이다. 문반 가문 출신으로 1576년(선조 9년) 무과(武科)에 급제[2]하여 그 관직이 동구비보 권관, 훈련원 봉사, 발포진 수군만호, 조산보 만호, 전라좌도 수군절도사를 거쳐 정헌대부 삼도수군통제사에 이르렀다. 함경도 동구비보권관(董仇非堡權管), 1581년 발포 수군만호(鉢浦水軍萬戶)가 되었다가 전라좌수영의 오동나무를 베기를 거절한 일로 좌수사 성박의 미움을 받기도 했다. 이후 1583년 남병사의 군관과 건원보권관, 훈련원참군, 1586년 사복시주부를 거쳐 조산보만호 겸 녹도둔전사의(造山堡萬戶兼鹿島屯田事宜)로 부임했다. 조산만호 겸 녹둔도사의 재직 중 1587년(선조 20년) 9월의 여진족의 사전 기습공격으로 벌어진 녹둔도전투에서 패하여, 북병사 이일의 탄핵을 받고 백의종군(白衣從軍)하는 위치에 서기도 했다.''',
         '이순신이 태어난 곳은?',
-        '한양', 
-        0.9),
+        '한성', 
+        '한성'),
     1:(
         '''조선 세종(朝鮮 世宗, 1397년 5월 15일[1] (음력 4월 10일) ~ 1450년 3월 30일 (음력 2월 17일), 재위 1418년 ~ 1450년)은 조선의 제4대 군주이며 언어학자이다. 그의 업적에 대한 존경의 의미를 담은 명칭인 세종대왕(世宗大王)으로 자주 일컬어진다. 성은 이(李), 휘는 도(祹), 본관은 전주(全州), 자는 원정(元正), 아명은 막동(莫同)이다. 세종은 묘호이며, 시호는 영문예무인성명효대왕(英文睿武仁聖明孝大王)이고, 명나라에서 받은 시호는 장헌(莊憲)이다. 존시를 합치면 세종장헌영문예무인성명효대왕(世宗莊憲英文睿武仁聖明孝大王)이 된다.''',
         '세종대왕은 조선의 몇 대 왕인가?', 
         '4대',
-        0.7),
+        '3대'),
     2:(
         '''이순신(李舜臣, 1545년 4월 28일 ~ 1598년 12월 16일 (음력 11월 19일))은 조선 중기의 무신이다. 본관은 덕수(德水), 자는 여해(汝諧), 시호는 충무(忠武)이며, 한성 출신이다. 문반 가문 출신으로 1576년(선조 9년) 무과(武科)에 급제[2]하여 그 관직이 동구비보 권관, 훈련원 봉사, 발포진 수군만호, 조산보 만호, 전라좌도 수군절도사를 거쳐 정헌대부 삼도수군통제사에 이르렀다. 함경도 동구비보권관(董仇非堡權管), 1581년 발포 수군만호(鉢浦水軍萬戶)가 되었다가 전라좌수영의 오동나무를 베기를 거절한 일로 좌수사 성박의 미움을 받기도 했다. 이후 1583년 남병사의 군관과 건원보권관, 훈련원참군, 1586년 사복시주부를 거쳐 조산보만호 겸 녹도둔전사의(造山堡萬戶兼鹿島屯田事宜)로 부임했다. 조산만호 겸 녹둔도사의 재직 중 1587년(선조 20년) 9월의 여진족의 사전 기습공격으로 벌어진 녹둔도전투에서 패하여, 북병사 이일의 탄핵을 받고 백의종군(白衣從軍)하는 위치에 서기도 했다.''',
         '이순신이 태어난 곳은?',
-        '한양', 
-        0.9),
+        '한성', 
+        '한성'),
     3:(
         '''조선 세종(朝鮮 世宗, 1397년 5월 15일[1] (음력 4월 10일) ~ 1450년 3월 30일 (음력 2월 17일), 재위 1418년 ~ 1450년)은 조선의 제4대 군주이며 언어학자이다. 그의 업적에 대한 존경의 의미를 담은 명칭인 세종대왕(世宗大王)으로 자주 일컬어진다. 성은 이(李), 휘는 도(祹), 본관은 전주(全州), 자는 원정(元正), 아명은 막동(莫同)이다. 세종은 묘호이며, 시호는 영문예무인성명효대왕(英文睿武仁聖明孝大王)이고, 명나라에서 받은 시호는 장헌(莊憲)이다. 존시를 합치면 세종장헌영문예무인성명효대왕(世宗莊憲英文睿武仁聖明孝大王)이 된다.''',
         '세종대왕은 조선의 몇 대 왕인가?', 
         '4대',
-        0.7)
+        '3대')
 }
 
 # straight from the wtforms docs:
@@ -124,19 +125,35 @@ def create_app_new(configfile=None):
         flash('uncategorized message')
         return render_template('index.html', form=form)
 
+    @app.route('/congrats')
+    def congrats():
+        return render_template('congrats.html')
+
+    @app.route('/wrong')
+    def wrong():
+        return render_template('wrong.html')
+
+
     @app.route('/quiz')
     def quiz():
         qid = random.sample(range(len(qa_set.keys())), 1)[0]
         contents, question, answer, score = qa_set[qid]
 
+        correct_count = 0
+        if request.args.get('correct_count'):
+            correct_count = int(request.args.get('correct_count'))
+
+        ai_correct_count = 0
+        if request.args.get('ai_correct_count'):
+            ai_correct_count = int(request.args.get('ai_correct_count'))
+
+        # for key in request.args.keys():
+        #     print(key + '  ' + request.args.get(key))
+        #     print(int(request.args.get('ai_correct_count')))
+        #     print
 
 
-        # product = PRODUCTS.get(key)
-        # if not product:
-        #     abort(404)
-        #return render_template('quiz.html', product=product)
-
-        return render_template('quiz.html', contents=contents, qid=qid, question=question)
+        return render_template('quiz.html', contents=contents, qid=qid, question=question, correct_count=correct_count, ai_correct_count=ai_correct_count)
 
     # @flask_sijax.route(app, '/result')
     @app.route('/result', methods=['POST'])
@@ -149,19 +166,42 @@ def create_app_new(configfile=None):
         # def say_hi(obj_response):
         #     obj_response.alert('Hi there!')
 
-        qid = request.form['qid']
-        answer = request.form['answer']
 
+        correct_count = int(request.form['correct_count'])
+        ai_correct_count = int(request.form['ai_correct_count'])
+
+        #ai_correct_count = int(request.form['ai_correct_count'])
+        
+        qid = request.form['qid']
+
+        answer = request.form['answer']
+        ai_answer = qa_set[int(qid)][3]
         correct_answer = qa_set[int(qid)][2]
+
         result_message = ''
         animation = ''
+        ai_result = ''
+        human_result = ''
+
+
+
+        if ai_answer == correct_answer:
+            ai_result = 'correct'
+            ai_correct_count = ai_correct_count + 1
+        else:
+            ai_result = 'wrong'
 
         if correct_answer == answer:
             result_message = '정답이에요~';
             animation = 'pulse slow';
+            human_result = 'correct'
+            correct_count = correct_count + 1 
         else:
             result_message = '땡! 기계보다 못한..'
-            animation = 'hinge delay-2s';
+            animation = 'hinge delay-2s'
+            human_result = 'wrong'
+
+        result = str(correct_answer==answer)
         
         
         # if g.sijax.is_sijax_request:
@@ -173,7 +213,15 @@ def create_app_new(configfile=None):
         return render_template('result.html', 
             result_message=result_message,
             correct_answer=correct_answer,
-            animation=animation)
+            animation=animation,
+            ai_result=ai_result,
+            human_result=human_result,
+            answer=answer,
+            correct_count=correct_count,
+            ai_correct_count=ai_correct_count,
+            result=(correct_answer==answer),
+            ai_answer=ai_answer)
+        #return json.dumps({'result_message':result_message,'correct_answer':correct_answer,'animation':animation});
 
 
     return app
