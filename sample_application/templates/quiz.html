@@ -84,26 +84,28 @@
   animation-duration: 600s;
   animation-iteration-count: 6;
 }
+*/
 .time-part.seconds.tens .digit-wrapper {
   animation-name: seconds-tens;
-  animation-duration: 60s;
-  animation-iteration-count: 60;
-}*/
+  animation-duration: 20s;
+  animation-iteration-count: 1;
+}
+
 .time-part.seconds.ones .digit-wrapper {
   animation-name: seconds-ones;
   animation-duration: 10s;
-  animation-iteration-count: 1;
+  animation-iteration-count: 2;
   animation-play-state: running;
 }
 .time-part.hundredths.tens .digit-wrapper {
   animation-name: hundredths-tens;
   animation-duration: 1s;
-  animation-iteration-count: 10;
+  animation-iteration-count: 20;
 }
 .time-part.hundredths.ones .digit-wrapper {
   animation-name: hundredths-ones;
   animation-duration: 0.1s;
-  animation-iteration-count: 100;
+  animation-iteration-count: 200;
 }
 
 /*@keyframes minutes-tens {
@@ -157,8 +159,8 @@
   90% {
     transform: translateY(-1800px);
   }
-}*/
-/*@keyframes seconds-tens {
+}
+@keyframes seconds-tens {
   0% {
     transform: translateY(-180px);
   }
@@ -177,7 +179,19 @@
   83.33333% {
     transform: translateY(-1080px);
   }
-}*/
+}
+*/
+@keyframes seconds-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  50% {
+    transform: translateY(-360px);
+  }
+  100% {
+    transform: translateY(-540px);
+  }
+}
 @keyframes seconds-ones {
   0% {
     transform: translateY(-180px);
@@ -410,7 +424,7 @@ code {
     <!-- Navigation -->
     <div class="bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <p class="navbar-brand js-scroll-trigger">10초안에 본문을 읽고 문제를 풀어보세요.</p>
+        <p class="navbar-brand js-scroll-trigger">20초안에 본문을 읽고 문제를 풀어보세요.</p>
       </div>
     </div>
 
@@ -418,8 +432,10 @@ code {
   <div class='wrapper text-center'>
   <div class='time-part-wrapper'>
     <div class='time-part seconds tens'>
-      <div class='digit-wrapper'>
-        <span class='digit'>0</span>
+      <div class='digit-wrapper' id='timer-digit-0'>
+        <span class='digit' id="zero-zero">0</span>
+        <span class='digit'>1</span>
+          <span class='digit'>0</span>
       </div>
     </div>
     <div class='time-part seconds ones'>
@@ -598,6 +614,7 @@ code {
 
     <script>
       function stopTimer() {
+        document.getElementById("timer-digit-0").style.webkitAnimationPlayState = "paused";
         document.getElementById("timer-digit-1").style.webkitAnimationPlayState = "paused";
         document.getElementById("timer-digit-2").style.webkitAnimationPlayState = "paused";
         document.getElementById("timer-digit-3").style.webkitAnimationPlayState = "paused";
@@ -746,7 +763,7 @@ code {
                   if (typeof (trigger) == "function") trigger(lastOff, newOff);
                   lastOff= o.offset();
               }*/
-              if ((lastOff.top != newOff.top || lastOff.left != newOff.left) && $("#first-zero").offset().top == $("#second-zero").offset().top && $("#second-zero").offset().top == $("#third-zero").offset().top) {
+              if ((lastOff.top != newOff.top || lastOff.left != newOff.left) && $("#first-zero").offset().top == $("#second-zero").offset().top && $("#second-zero").offset().top == $("#third-zero").offset().top && $("#zero-zero").offset().top == $("#third-zero").offset().top) {
                 $(this).trigger('onOffsetChanged', { lastOff: lastOff, newOff: newOff});
                 if (typeof (trigger) == "function") trigger(lastOff, newOff);
                 lastOff= o.offset();
