@@ -1,0 +1,31 @@
+<body>      
+      <div class="container">
+        <h2 class="correct-answer text-center text-uppercase text-secondary animated tada mb-0">정답은 {{ correct_answer }} 입니다.</h2>
+        <hr class="garo"> 
+
+        <div class="row">
+          <div class="col-lg-4 mx-auto">
+            <div class="q_title">AI</div>
+            <p class="text-center result_title animated pulse">{{ correct_answer }}</p>
+          </div>
+          <div class="col-lg-1 mx-auto">
+            <div class="vs" style="margin-top: 3rem;">VS</div>
+          </div>
+          <div class="col-lg-4 mx-auto">
+            <div class="q_title">YOU</div>
+            <p class="text-center result_title animated {{ animation }}">{{ result_message }}</p>
+              <div class="form-group">
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">Retry?</a>
+              </div>
+          </div>
+        </div>
+      </div>
+</body>
+<script type="text/javascript">
+  $('#refreshButton').click(function() {
+    location.reload();
+  })
+</script>
+
+
+

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Freelancer - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="{{url_for('static', filename='vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css')}}">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='css/freelancer.css')}}" rel="stylesheet">
+    <!-- <link href="{{url_for('static', filename='css/materialize.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/material.css')}}" rel="stylesheet"> -->
+
+    <!-- timer -->
+    <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link href="{{url_for('static', filename='css/animate.css')}}" rel="stylesheet">
+
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      /* Play with speed and easing of the animation */
+/* =========================================== */
+.digit {
+  display: inline-block;
+  font-size: 200px;
+  color: rgba(0, 0, 0, 0.25);
+  height: 180px;
+  line-height: 1;
+}
+
+.time-part-wrapper {
+  display: inline-block;
+  margin-right: 50px;
+  position: relative;
+}
+.time-part-wrapper:not(:last-child):after {
+  content: ":";
+  display: block;
+  width: 30px;
+  height: 230px;
+  position: absolute;
+  top: 0px;
+  right: -30px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 200px;
+  line-height: 0.9;
+}
+
+.time-part {
+  width: 140px;
+  text-align: center;
+  height: 180px;
+  overflow: hidden;
+  display: inline-block;
+  margin-left: -5px;
+  box-sizing: border-box;
+}
+.time-part .digit-wrapper {
+  animation-timing-function: cubic-bezier(1, 0, 1, 0);
+}
+/*.time-part.minutes.tens .digit-wrapper {
+  animation-name: minutes-tens;
+  animation-duration: 3600s;
+  animation-iteration-count: 1;
+}
+.time-part.minutes.ones .digit-wrapper {
+  animation-name: minutes-ones;
+  animation-duration: 600s;
+  animation-iteration-count: 6;
+}
+.time-part.seconds.tens .digit-wrapper {
+  animation-name: seconds-tens;
+  animation-duration: 60s;
+  animation-iteration-count: 60;
+}*/
+.time-part.seconds.ones .digit-wrapper {
+  animation-name: seconds-ones;
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+}
+.time-part.hundredths.tens .digit-wrapper {
+  animation-name: hundredths-tens;
+  animation-duration: 1s;
+  animation-iteration-count: 10;
+}
+.time-part.hundredths.ones .digit-wrapper {
+  animation-name: hundredths-ones;
+  animation-duration: 0.1s;
+  animation-iteration-count: 100;
+}
+
+/*@keyframes minutes-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  16.66667% {
+    transform: translateY(-360px);
+  }
+  33.33333% {
+    transform: translateY(-540px);
+  }
+  50% {
+    transform: translateY(-720px);
+  }
+  66.66667% {
+    transform: translateY(-900px);
+  }
+  83.33333% {
+    transform: translateY(-1080px);
+  }
+}
+@keyframes minutes-ones {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}*/
+/*@keyframes seconds-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  16.66667% {
+    transform: translateY(-360px);
+  }
+  33.33333% {
+    transform: translateY(-540px);
+  }
+  50% {
+    transform: translateY(-720px);
+  }
+  66.66667% {
+    transform: translateY(-900px);
+  }
+  83.33333% {
+    transform: translateY(-1080px);
+  }
+}*/
+@keyframes seconds-ones {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+@keyframes hundredths-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+@keyframes hundredths-ones {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+body {
+  /*background: #F1614B;*/
+  margin: 0;
+  font-family: "Aldrich";
+}
+
+.wrapper {
+  background: #F1614B;
+  /*margin: 100px auto;*/
+  padding-top: 5rem;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+.wrapper:before, .wrapper:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 20px;
+  z-index: 10;
+}
+.wrapper:before {
+  top: 0px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f1614b), color-stop(100%, rgba(241, 97, 75, 0)));
+  background-image: -moz-linear-gradient(top, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+  background-image: -webkit-linear-gradient(top, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+  background-image: linear-gradient(to bottom, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+}
+.wrapper:after {
+  bottom: 0px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMTYxNGIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(241, 97, 75, 0)), color-stop(100%, #f1614b));
+  background-image: -moz-linear-gradient(top, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+  background-image: -webkit-linear-gradient(top, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+  background-image: linear-gradient(to bottom, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+}
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <div class="bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <p class="navbar-brand js-scroll-trigger">10초안에 본문을 읽고 문제를 풀어보세요.</p>
+      </div>
+    </div>
+
+  <!-- <section id="timer"> -->
+  <div class='wrapper text-center'>
+  <div class='time-part-wrapper'>
+    <div class='time-part seconds tens'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+    <div class='time-part seconds ones'>
+      <div class='digit-wrapper' id='timer-digit-1'>
+        <span class='digit' id="first-zero">0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+  </div>
+  <div class='time-part-wrapper'>
+    <div class='time-part hundredths tens'>
+      <div class='digit-wrapper' id='timer-digit-2'>
+        <span class='digit' id="second-zero">0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+    <div class='time-part hundredths ones'>
+      <div class='digit-wrapper' id='timer-digit-3'>
+        <span class='digit' id="third-zero">0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- </section> -->
+
+    <!-- Header -->
+    <div class="bg-primary text-black text-center">
+      <div class="container">
+        <!-- <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt=""> -->
+        <div class="row">
+          <div>
+            <!-- <p class="bonmun"><b>이순신(李舜臣, 1545년 4월 28일 ~ 1598년 12월 16일 (음력 11월 19일))은 조선 중기의 무신이다. 본관은 덕수(德水), 자는 여해(汝諧), 시호는 충무(忠武)이며, 한성 출신이다. 문반 가문 출신으로 1576년(선조 9년) 무과(武科)에 급제[2]하여 그 관직이 동구비보 권관, 훈련원 봉사, 발포진 수군만호, 조산보 만호, 전라좌도 수군절도사를 거쳐 정헌대부 삼도수군통제사에 이르렀다. 함경도 동구비보권관(董仇非堡權管), 1581년 발포 수군만호(鉢浦水軍萬戶)가 되었다가 전라좌수영의 오동나무를 베기를 거절한 일로 좌수사 성박의 미움을 받기도 했다. 이후 1583년 남병사의 군관과 건원보권관, 훈련원참군, 1586년 사복시주부를 거쳐 조산보만호 겸 녹도둔전사의(造山堡萬戶兼鹿島屯田事宜)로 부임했다. 조산만호 겸 녹둔도사의 재직 중 1587년(선조 20년) 9월의 여진족의 사전 기습공격으로 벌어진 녹둔도전투에서 패하여, 북병사 이일의 탄핵을 받고 백의종군(白衣從軍)하는 위치에 서기도 했다. </b></p> -->
+            <p class="bonmun"><b>{{contents}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio">
+      <div class="container">
+        <h2 class="question text-center text-uppercase text-secondary mb-0">문제 : {{ question }}</h2>
+        <hr class="garo"> 
+      <div class="container" id="portfolio">
+        <div class="row">
+          <div class="col-lg-4 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+            <div class="q_title">AI</div>
+            <div name="sentMessage" id="ai" novalidate="novalidate">
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label id="answer_label">답을 입력해주세요.</label>
+                  <input class="form-control animated slideInLeft" id="ai_answer" type="text" placeholder="AI가 문제를 풀었습니다." required="required" data-validation-required-message="답을 입력해주세요.">
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+          <div class="col-lg-1 mx-auto">
+            <div class="vs">VS</div>
+          </div>
+          <div class="col-lg-4 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+            <div class="q_title">YOU</div>
+
+            <form name="sentMessage" id="contactForm" novalidate="novalidate" autocomplete="off">
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label id="answer_label">답을 입력해주세요.</label>
+                  <input class="form-control animated infinite pulse delay-1s" name="answer" id="answer" type="text" placeholder="답을 입력해주세요." required="required" data-validation-required-message="답을 입력해주세요.">
+                  <input type="hidden" name="qid" value="{{ qid }}">
+                </div>
+              </div>
+            </form>
+            <br>
+              <div class="form-group">
+                <button  class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('index') }}">Back</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/freelancer.min.js"></script>
+
+    <script>
+      function stopTimer() {
+        document.getElementById("timer-digit-1").style.webkitAnimationPlayState = "paused";
+        document.getElementById("timer-digit-2").style.webkitAnimationPlayState = "paused";
+        document.getElementById("timer-digit-3").style.webkitAnimationPlayState = "paused";
+      }
+
+      function submitAnswer() {
+             $.ajax({
+              type : "POST",
+              url : "{{ url_for('result') }}",
+              data: $('form').serialize(),
+              //data: data_str,
+              success: function(response) {
+                $('#portfolio').html(response);
+
+              },
+              error: function(error) {
+                console.log(error)
+              }
+
+            }).done(function (reply) {
+                $('#portfolio').html(reply);
+             });
+      }
+
+      $(document).ready( function() {
+          $('#sendMessageButton').click(function() {
+            //alert($('#answer').val())
+            /*$.ajax({
+              type : "POST",
+              url : "{{ url_for('result') }}",
+              data: 'dkdkdk'
+            })
+            .done(function(reply) {
+              $('#portfolio').html(reply);
+            });*/
+            //alert($('#seconds-ones').prop('animation-play-state'))
+            //$('#seconds-ones').stop()
+            //$('#seconds-ones').style.webkitAnimationPlayState="paused";
+            //$("#wefwefwef").css("animation-play-state", "paused");
+            //$("#secones").style.webkitAnimationPlayState="paused";
+            
+            //alert(secones.style.animationIterationCount);
+            //document.getElementById("mayer").style.webkitAnimationPlayState = "paused";
+            
+            /*document.getElementById("timer-digit-1").style.webkitAnimationPlayState = "paused";
+            document.getElementById("timer-digit-2").style.webkitAnimationPlayState = "paused";
+            document.getElementById("timer-digit-3").style.webkitAnimationPlayState = "paused";*/
+
+            stopTimer();
+
+            submitAnswer();
+            
+
+             
+
+
+          });
+
+        //$("#answer").keydown(function(key) {
+        $("#contactForm").submit(function(e) {
+          e.preventDefault();
+        });
+
+        $("#contactForm").keydown(function(key) {
+          if (key.keyCode == 13) {
+            stopTimer();
+
+            submitAnswer();
+
+
+          }
+        });
+      });
+
+
+
+      /*alert($("#minsection1").text())
+      alert($("#minsection2").text())*/
+      //alert($("#ekek").is(":visible"))
+
+      /*jQuery(function($) {
+        $('#ekek')
+
+      });*/
+      $(document).ready(function(){ $("#answer").focus(); });
+
+
+      jQuery.fn.onPositionChanged = function (trigger, millis) {
+          if (millis == null) millis = 1000;
+          var o = $(this[0]); // our jquery object
+          //var origin = $('#esens')
+          if (o.length < 1) return o;
+
+          var lastPos = null;
+          var lastOff = null;
+          setInterval(function () {
+              if (o == null || o.length < 1) return o; // abort if element is non existend eny more
+              if (lastPos == null) lastPos = o.position();
+              if (lastOff == null) lastOff = o.offset();
+              var newPos = o.position();
+              var newOff = o.offset();
+              /*if (lastPos.top != newPos.top || lastPos.left != newPos.left) {
+                  $(this).trigger('onPositionChanged', { lastPos: lastPos, newPos: newPos });
+                  if (typeof (trigger) == "function") trigger(lastPos, newPos);
+                  lastPos = o.position();
+              }*/
+              /*if (lastOff.top != newOff.top || lastOff.left != newOff.left) {
+                  $(this).trigger('onOffsetChanged', { lastOff: lastOff, newOff: newOff});
+                  if (typeof (trigger) == "function") trigger(lastOff, newOff);
+                  lastOff= o.offset();
+              }*/
+              if ((lastOff.top != newOff.top || lastOff.left != newOff.left) && $("#first-zero").offset().top == $("#second-zero").offset().top && $("#second-zero").offset().top == $("#third-zero").offset().top) {
+                $(this).trigger('onOffsetChanged', { lastOff: lastOff, newOff: newOff});
+                if (typeof (trigger) == "function") trigger(lastOff, newOff);
+                lastOff= o.offset();
+              }
+          }, millis);
+
+          return o;
+      };
+
+
+      $("#first-zero").onPositionChanged(function(lastOff, newOff){
+        //alert('finish')
+             $.ajax({
+              type : "POST",
+              url : "{{ url_for('result') }}",
+              data: $('form').serialize(),
+              //data: data_str,
+              success: function(response) {
+                $('#portfolio').html(response);
+
+              },
+              error: function(error) {
+                console.log(error)
+              }
+
+            }).done(function (reply) {
+                $('#portfolio').html(reply);
+             });
+      });
+
+    </script>
+
+
+  </body>
+
+</html>
