@@ -25,7 +25,7 @@
 
 {% elif correct_count > 0 and correct_count < 3 %}
               <div class="form-group text-center">
-                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('quiz') }}?correct_count={{ correct_count }}&ai_correct_count={{ ai_correct_count }}">Next?</a>
+                <a class="btn btn-xl btn-outline-info text-center" href="{{ url_for('quiz') }}?correct_count={{ correct_count }}&ai_correct_count={{ ai_correct_count }}&correct_qids={{ correct_qids }}">Next?</a>
               </div>
 
 {% else %}

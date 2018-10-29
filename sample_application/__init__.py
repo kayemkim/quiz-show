@@ -30,7 +30,7 @@ qa_set = {
         '시야 확보를 위한 중요한 도구는?',
         '고글',
         '고글'
-        ),
+         ),
     3:(
         '''2014년부터 국제탁구연맹은 공의 재질을 셀룰로이드에서 플라스틱으로 바꾸었다. 이 플라스틱 공을 일반적으로 폴리볼이라 부르는데 기존의 셀룰로이드 볼과 같이 두 조각을 이어 붙여 이음매가 존재하는 형태와 통째로 사출하여 이음매 없는 버전 모두 공인되어 사용되고 있다. 유럽에서는 폴리볼이 2014년 초에 바로 도입이 되었지만 아시아권에서는 유럽보다 늦은 2014년 인천 아시안 게임 이후 본격적인 사용이 이루어지게 되었다. 메이커 별로 어느정도 차이는 있지만 기존 셀룰로이드 볼에 비해서 회전이 잘 걸리지 않는다는 평이 대다수다(이제는 플라스틱공만을 경기에서 쓰도록 바뀌었다. 117년만에 공의 재질이 바뀌는 것인데, 그 이유는 기존의 셀룰로이드를 태울 때 나오는 독성 때문이다. ''',
         '117년만에 공의 재질이 바뀐 것은 셀룰로이드를 태울 때 나오는 무엇 때문인가?',
@@ -343,13 +343,21 @@ def create_app_new(configfile=None):
         if request.args.get('ai_correct_count'):
             ai_correct_count = int(request.args.get('ai_correct_count'))
 
+        correct_qids = []
+        if correct_count > 0:
+            if request.args.get('correct_qids'):
+                correct_qids = request.args.get('correct_qids').split(',')
+                print(correct_qids)
+                while (str(qid) in correct_qids):
+                    qid = random.sample(range(len(qa_set.keys())), 1)[0]
+
         # for key in request.args.keys():
         #     print(key + '  ' + request.args.get(key))
         #     print(int(request.args.get('ai_correct_count')))
         #     print
 
 
-        return render_template('quiz.html', contents=contents, qid=qid, question=question, correct_count=correct_count, ai_correct_count=ai_correct_count)
+        return render_template('quiz.html', contents=contents, qid=qid, question=question, correct_count=correct_count, ai_correct_count=ai_correct_count, correct_qids=','.join(correct_qids))
 
     # @flask_sijax.route(app, '/result')
     @app.route('/result', methods=['POST'])
@@ -365,6 +373,7 @@ def create_app_new(configfile=None):
 
         correct_count = int(request.form['correct_count'])
         ai_correct_count = int(request.form['ai_correct_count'])
+        correct_qids = request.form['correct_qids'].split(',')
 
         #ai_correct_count = int(request.form['ai_correct_count'])
         
@@ -391,11 +400,17 @@ def create_app_new(configfile=None):
             result_message = '정답이에요~';
             animation = 'pulse slow';
             human_result = 'correct'
-            correct_count = correct_count + 1 
+            correct_count = correct_count + 1
+            if correct_qids == ['']:
+                correct_qids = [qid]
+            else:
+                correct_qids.append(qid)
+
         else:
             result_message = '땡! 기계보다 못한..'
             animation = 'hinge delay-2s'
             human_result = 'wrong'
+            correct_qids = []
 
         result = str(correct_answer==answer)
         
@@ -416,7 +431,8 @@ def create_app_new(configfile=None):
             correct_count=correct_count,
             ai_correct_count=ai_correct_count,
             result=(correct_answer==answer),
-            ai_answer=ai_answer)
+            ai_answer=ai_answer,
+            correct_qids=','.join(correct_qids))
         #return json.dumps({'result_message':result_message,'correct_answer':correct_answer,'animation':animation});
 
 
