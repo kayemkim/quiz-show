@@ -1,3 +1,5 @@
 .envrc
 *.pyc
 venv
+**/.DS_Store
+**/*.pyc
